@@ -15,7 +15,26 @@
  */
 package pl.com.bottega.ecommerce.sales.domain.productscatalog;
 
-public enum ProductType {
-	DRUG, FOOD, STANDARD
+import java.math.BigDecimal;
 
+public enum ProductType {
+	DRUG(0.05, "5% (D)"),
+    FOOD(0.07, "7% (F)"),
+    STANDARD(0.23, "23%");
+
+    private double taxValue;
+    private String taxDesc;
+
+    ProductType(double taxValue, String taxDesc) {
+        this.taxValue = taxValue;
+        this.taxDesc = taxDesc;
+    }
+
+    public BigDecimal getTaxValue() {
+        return BigDecimal.valueOf(taxValue);
+    }
+
+    public String getTaxDesc() {
+        return taxDesc;
+    }
 }

@@ -36,6 +36,14 @@ class RequestItem {
 		return totalCost;
 	}
 
+    InvoiceLine convertToInvoiceLine(){
+        return new InvoiceLine(productData,
+                quantity,
+                getTotalCost(),
+                getTaxValue()
+        );
+    }
+
 	public ProductData getProductData() {
 		return productData;
 	}
@@ -44,4 +52,7 @@ class RequestItem {
 		return quantity;
 	}
 
+    private Tax getTaxValue(){
+        return TaxCalculator.calculate(productData.getType(), getTotalCost());
+    }
 }
